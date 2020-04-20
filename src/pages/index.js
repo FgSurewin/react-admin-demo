@@ -1,8 +1,42 @@
 // import NotFound from './NotFond'
-export { default as NotFound } from './NotFond';
-export { default as Admin } from './Admin';
-export { default as Login } from './Login';
-export { default as Setting } from './Setting';
-export { default as Article } from './Article';
-export { default as Posts } from './Posts';
-export { default as Dashboard } from './Dashboard';
+// import NotFound from './NotFond';
+// import Admin from './Admin';
+// import Login from './Login';
+// import Setting from './Setting';
+// import Article from './Article';
+// import Posts from './Posts';
+// import Dashboard from './Dashboard';
+import { Loading } from '../components';
+import Loadable from '../Loadable';
+
+const NotFound = Loadable({
+	loader: () => import('./NotFound'),
+	loading: Loading,
+});
+const Admin = Loadable({
+	loader: () => import('./Admin'),
+	loading: Loading,
+});
+const Login = Loadable({
+	loader: () => import('./Login'),
+	loading: Loading,
+});
+const Setting = Loadable({
+	loader: () => import('./Setting'),
+	loading: Loading,
+});
+const Article = Loadable({
+	loader: () => import('./Article'),
+	loading: Loading,
+});
+const Posts = Loadable({
+	loader: () => import('./Posts'),
+	loading: Loading,
+});
+
+const Dashboard = Loadable({
+	loader: () => import('./Dashboard'),
+	loading: Loading,
+});
+
+export { NotFound, Admin, Login, Setting, Article, Posts, Dashboard };
