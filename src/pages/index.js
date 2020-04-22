@@ -6,37 +6,22 @@
 // import Article from './Article';
 // import Posts from './Posts';
 // import Dashboard from './Dashboard';
+import React from 'react';
 import { Loading } from '../components';
-import Loadable from '../Loadable';
+//import loadable from '../loadable';
+import loadable from '@loadable/component';
 
-const NotFound = Loadable({
-	loader: () => import('./NotFound'),
-	loading: Loading,
+const NotFound = loadable(() => import('./NotFound'), {
+	fallback: <Loading />,
 });
-const Admin = Loadable({
-	loader: () => import('./Admin'),
-	loading: Loading,
-});
-const Login = Loadable({
-	loader: () => import('./Login'),
-	loading: Loading,
-});
-const Setting = Loadable({
-	loader: () => import('./Setting'),
-	loading: Loading,
-});
-const Article = Loadable({
-	loader: () => import('./Article'),
-	loading: Loading,
-});
-const Posts = Loadable({
-	loader: () => import('./Posts'),
-	loading: Loading,
-});
+const Admin = loadable(() => import('./Admin'), { fallback: <Loading /> });
+const Login = loadable(() => import('./Login'), { fallback: <Loading /> });
+const Setting = loadable(() => import('./Setting'), { fallback: <Loading /> });
+const Article = loadable(() => import('./Article'), { fallback: <Loading /> });
+const Posts = loadable(() => import('./Posts'), { fallback: <Loading /> });
 
-const Dashboard = Loadable({
-	loader: () => import('./Dashboard'),
-	loading: Loading,
+const Dashboard = loadable(() => import('./Dashboard'), {
+	fallback: <Loading />,
 });
 
 export { NotFound, Admin, Login, Setting, Article, Posts, Dashboard };

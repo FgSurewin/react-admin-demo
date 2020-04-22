@@ -1,87 +1,82 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { Link } from 'react-router-dom';
 import {
 	UserOutlined,
 	LaptopOutlined,
 	NotificationOutlined,
+	HomeOutlined,
 } from '@ant-design/icons';
+import { subRouter } from './routes';
 
-const { SubMenu } = Menu;
+//const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 export default class Frame extends Component {
+	constructor() {
+		super();
+		this.state = {
+			selected: 'dashboard',
+		};
+	}
+
 	render() {
-		console.log(this.props);
+		const { dashboard, article, setting } = subRouter;
+		const { selected } = this.state;
 		return (
 			<Layout>
 				<Header className='header'>
-					<div className='logo' />
-					<Menu theme='dark' mode='horizontal' defaultSelectedKeys={['2']}>
-						<Menu.Item key='1'>nav 1</Menu.Item>
-						<Menu.Item key='2'>nav 2</Menu.Item>
-						<Menu.Item key='3'>nav 3</Menu.Item>
-					</Menu>
+					<div className='logo'>
+						<h2 style={{ color: '#FFF' }}>F&G</h2>
+					</div>
 				</Header>
 				<Layout>
 					<Sider width={200} className='site-layout-background'>
 						<Menu
 							mode='inline'
-							defaultSelectedKeys={['1']}
-							defaultOpenKeys={['sub1']}
+							selectedKeys={selected}
 							style={{ height: '100%', borderRight: 0 }}>
-							<SubMenu
-								key='sub1'
-								title={
-									<span>
-										<UserOutlined />
-										subnav 1
-									</span>
-								}>
-								<Menu.Item key='1'>option1</Menu.Item>
-								<Menu.Item key='2'>option2</Menu.Item>
-								<Menu.Item key='3'>option3</Menu.Item>
-								<Menu.Item key='4'>option4</Menu.Item>
-							</SubMenu>
-							<SubMenu
-								key='sub2'
-								title={
-									<span>
-										<LaptopOutlined />
-										subnav 2
-									</span>
-								}>
-								<Menu.Item key='5'>option5</Menu.Item>
-								<Menu.Item key='6'>option6</Menu.Item>
-								<Menu.Item key='7'>option7</Menu.Item>
-								<Menu.Item key='8'>option8</Menu.Item>
-							</SubMenu>
-							<SubMenu
-								key='sub3'
-								title={
-									<span>
-										<NotificationOutlined />
-										subnav 3
-									</span>
-								}>
-								<Menu.Item key='9'>option9</Menu.Item>
-								<Menu.Item key='10'>option10</Menu.Item>
-								<Menu.Item key='11'>option11</Menu.Item>
-								<Menu.Item key='12'>option12</Menu.Item>
-							</SubMenu>
+							<Menu.Item
+								key='dashboard'
+								onClick={() => this.setState({ selected: 'dashboard' })}>
+								<Link to={dashboard.pathName}>
+									<UserOutlined />
+									Dashboard
+								</Link>
+							</Menu.Item>
+							<Menu.Item
+								key='setting'
+								onClick={() => this.setState({ selected: 'setting' })}>
+								<Link to={setting.pathName}>
+									<LaptopOutlined />
+									Setting
+								</Link>
+							</Menu.Item>
+							<Menu.Item
+								key='article'
+								onClick={() => this.setState({ selected: 'article' })}>
+								<Link to={article.pathName}>
+									<NotificationOutlined />
+									Article
+								</Link>
+							</Menu.Item>
 						</Menu>
 					</Sider>
 					<Layout style={{ padding: '0 24px 24px' }}>
 						<Breadcrumb style={{ margin: '16px 0' }}>
-							<Breadcrumb.Item>Home</Breadcrumb.Item>
-							<Breadcrumb.Item>List</Breadcrumb.Item>
-							<Breadcrumb.Item>App</Breadcrumb.Item>
+							<Breadcrumb.Item
+								onClick={() => this.setState({ selected: 'dashboard' })}>
+								<Link to={dashboard.pathName}>
+									<HomeOutlined />
+								</Link>
+							</Breadcrumb.Item>
 						</Breadcrumb>
 						<Content
 							className='site-layout-background'
 							style={{
 								padding: 24,
 								margin: 0,
-								minHeight: 280,
+								height: '100%',
 							}}>
 							{this.props.children}
 						</Content>
